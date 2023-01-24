@@ -12,7 +12,7 @@ function Counter(props) {
   return (
     <div className='border border-3 p-2 border-success'>
       <h1>Counter</h1>
-      <h2>Count:{count}</h2>
+      <h2 style={((count%2)===0)?{backgroundColor:'red'}:{backgroundColor:'blue'}}>Count:{count}</h2>
       <button onClick={inc}>Increment</button>
       <button onClick={dec}>Decrement</button>
     </div>
