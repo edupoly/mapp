@@ -13,4 +13,4 @@ function Todo(props) {
   )
 }
 
-export default React.memo(Todo)
+export default Todo

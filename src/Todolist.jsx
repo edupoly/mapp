@@ -3,6 +3,7 @@ import Todo from './Todo';
 
 function Todolist() {
   console.log("Todolist rendered")
+  var newtaskref = React.useRef()
   var [todos,setTodos] = React.useState([
     {
       title:'clear bills',
@@ -26,18 +27,21 @@ function Todolist() {
     },
   ])
   function addTask(){
-    var newtask = document.getElementById('task').value;
+    var newtask = newtaskref.current.value;
     setTodos([...todos,{title:newtask,status:false}])
   }
-  var done=React.useCallback(function(i){
+  var done=function(i){
     var temp = [...todos];
     temp[i].status=!temp[i].status;
     setTodos([...temp])
-  },[])
+  }
+  React.useEffect(()=>{
+    console.log("Todolist component useEffect called")
+  })
   return (
     <div className='border border-2 p-2 m-2'>
       <h1>Todolist</h1>
-      <input type="text" id='task' />
+      <input type="text" ref={newtaskref}/>
       <button onClick={addTask}>Add Task</button>
       {
         todos.map((todo,i)=>{
