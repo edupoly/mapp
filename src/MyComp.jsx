@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 function MyComp() {
   console.log("First line of MyComp")
