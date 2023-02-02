@@ -1,15 +1,14 @@
 import React from 'react';
 import './App.css';
-import Todolist from './Todolist';
-import MyComp from './MyComp';
-import MyForm from './MyForm';
+import { Link,Outlet } from 'react-router-dom';
 
 function App() {
   return (
     <div className='border border-2 p-2 border-danger'>
-      <MyForm></MyForm>
-      <MyComp></MyComp>
-      <Todolist></Todolist>
+      <h1>My App</h1>
+      <Link to='/myform'>Your Form</Link>&nbsp;&nbsp;&nbsp;
+      <Link to="/todolist">Todolist</Link>
+      <Outlet></Outlet>
     </div>
   );
 }
