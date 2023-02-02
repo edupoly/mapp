@@ -7,26 +7,10 @@ import {
     createBrowserRouter,
     RouterProvider,
   } from "react-router-dom";
-import MyComp from './MyComp';
-import MyForm from './MyForm';
-import Todolist from './Todolist';
 
 
 const router = createBrowserRouter([
-    {
-        path:'/',
-        element:<App></App>,
-        children:[
-            {
-                path:'/todolist',
-                element:<Todolist/>
-            }
-        ]
-    },
-    {
-        path:'/myform',
-        element:<MyForm></MyForm>
-    },
+    
     
 ])
 const root = ReactDOM.createRoot(document.getElementById('root'));
