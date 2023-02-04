@@ -1,13 +1,13 @@
 import React from 'react';
+import { Outlet } from 'react-router';
 import './App.css';
-import { Link,Outlet } from 'react-router-dom';
+import Navbar from './Navbar';
+
 
 function App() {
   return (
-    <div className='border border-2 p-2 border-danger'>
-      <h1>My App</h1>
-      <Link to='/myform'>Your Form</Link>&nbsp;&nbsp;&nbsp;
-      <Link to="/todolist">Todolist</Link>
+    <div>
+      <Navbar></Navbar>
       <Outlet></Outlet>
     </div>
   );
