@@ -9,6 +9,7 @@ import {
     RouterProvider,
   } from "react-router-dom";
 import Countries from './Countries';
+import CountryDetails from './CountryDetails';
 
 
 const router = createBrowserRouter([
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
             {
                 path:'/countries',
                 element:<Countries></Countries>
+            },
+            {
+                path:'/countryDetails/:code',
+                element:<CountryDetails></CountryDetails>
             }
         ]
     }
