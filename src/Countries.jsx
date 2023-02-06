@@ -10,6 +10,11 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import Icon from '@mui/material/Icon';
 import { Link, useNavigate } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
+function valuetext(value) {
+  return `${value}°C`;
+}
 function Countries() {
   const [countries, setCountries] = useState([]);
   const [cview, setCview] = useState('grid')
@@ -17,6 +22,11 @@ function Countries() {
   const [filterValues, setFilterValues] = useState([])
   const [selectedFilters, setSelectedFilters] = useState([])
   const [filteredCountries, setFilteredCountries] = useState([])
+  const [value, setValue] = React.useState([20, 37]);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
   var navigate = useNavigate()
   useEffect(()=>{
     var temp={}
@@ -105,7 +115,6 @@ function Countries() {
       <div className='d-flex flex-wrap'>
         <div id="filters" className='border border-1' style={{width:'20%'}} >
           {
-
               selectedFilters.region && (selectedFilters.region.length>0 || selectedFilters.subregion.length>0) && (
               <div className='border border-1 m-2 p-2 d-flex flex-wrap' >
                 <Stack direction="row" className='overflow-scroll' spacing={1}>
@@ -120,8 +129,17 @@ function Countries() {
               </div>
             )
           }
-          
-        
+          <div className='m-4'>
+          <Box>
+            <Slider
+              getAriaLabel={() => 'Temperature range'}
+              value={value}
+              onChange={handleChange}
+              valueLabelDisplay="auto"
+              getAriaValueText={valuetext}
+            />
+          </Box>
+          </div>
           <div className='m-4'>
             {
               filterValues && filterValues.map((filter)=>{
