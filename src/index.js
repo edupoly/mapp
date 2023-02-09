@@ -10,6 +10,8 @@ import {
 import MyComp from './MyComp';
 import MyForm from './MyForm';
 import Todolist from './Todolist';
+import Countries from './Countries';
+import CountryDetails from './CountryDetails';
 
 
 const router = createBrowserRouter([
@@ -20,7 +22,15 @@ const router = createBrowserRouter([
             {
                 path:'/todolist',
                 element:<Todolist/>
-            }
+            },
+            {
+                path:'/countries',
+                element:<Countries/>
+            },
+            {
+                path:'/countryDetails/:x',
+                element:<CountryDetails/>
+            },
         ]
     },
     {
