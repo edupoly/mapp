@@ -1,5 +1,5 @@
-import CounterReducer from "./reducer";
+import reducer from "./reducer";
 import {createStore} from 'redux';
 
-var store = new createStore(CounterReducer)
+var store = new createStore(reducer)
 export default store
