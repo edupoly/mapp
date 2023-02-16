@@ -1,4 +1,5 @@
 import {connect} from 'react-redux'
+import { incrementCount } from './store/actions'
 function Counter(props) {
   console.log(props)
   return (
@@ -13,7 +14,7 @@ function Counter(props) {
 export default connect(
   function(state){return state.counter},
   function(dispatch){return {
-    inc:()=>{dispatch({type:'INC'})},
+    inc:()=>{dispatch(incrementCount())},
     dec:()=>{dispatch({type:'DEC'})},
     reset:()=>{dispatch({type:'RESET'})},
   }}

@@ -1,5 +1,6 @@
 import { connect } from "react-redux"
 import React,{useState} from 'react';
+import { addTodoItem } from "./store/actions";
 
 function Todolist(props) {
   console.log("props::",props)
@@ -22,7 +23,7 @@ export default connect(
   function(state){return state.todos},
   function(dispatch){
     return {
-      addTodoItem:(nt)=>{dispatch({type:'ADDTODO',payload:nt})}
+      addTodoItem:(nt)=>{dispatch(addTodoItem(nt))}
     }
   }
 )(Todolist)
