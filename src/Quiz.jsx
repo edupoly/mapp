@@ -1,12 +1,9 @@
 import { useState,useEffect } from "react"
-import { connect } from "react-redux"
-import { getQuestions } from "./store/actions"
+import Question from "./Question"
 
 function Quiz(props) {
   console.log("Quiz component",props)
-  useEffect(()=>{
-    props.loadQuiz()
-  },[])
+  
   useEffect(()=>{
     console.log(questions)
     setQuestions([...props.questions])
@@ -17,8 +14,10 @@ function Quiz(props) {
     console.log(questions)
   }
   const [result, setResult] = useState({scored:0,outof:0})
+  const [isSubmitted, setIsSubmitted] = useState(false)
   function submitQuiz(){
     var score=0;
+    setIsSubmitted(true)
     questions.forEach((q)=>{
       if(q.correctAnswer===q.selectedAnswer){
         score++;
@@ -29,34 +28,24 @@ function Quiz(props) {
   return (
     <div className='border border-2 p-2 border-secondary m-2'>
       <h1>Quiz</h1>
-      <h1>Score:{result.scored}/{result.outof}</h1>
-      <ul>
-        {
-          questions && questions.map((q,i)=>{
-            return <li>
-              {q.question}
-              <div>
-                {
-                  q.options.map((a)=>{
-                    return <div>
-                      <input type="radio" name={q.id} onChange={()=>{markAnswer(a,i)}}/>:{a}
-                    </div>
-                  })
-                }
-              </div>
-            </li>
-          })
-        }
-      </ul>
-      <button onClick={submitQuiz}>Submit</button>
+      <div className="d-flex flex-wrap">
+        
+        <ol className="w-75 p-4">
+          {
+            questions && questions.map((q,i)=>{
+              return <Question isSubmitted={isSubmitted} q={q} i={i} markAnswer={markAnswer}></Question>
+            })
+          }
+        </ol>
+        <div className="w-25 position-relative">
+        <div className="p-4 position-fixed">
+          <button onClick={submitQuiz} className='btn btn-info'>Submit Quiz</button>
+          <h1>Score:{result.scored}/{result.outof}</h1>
+        </div>
+        </div>
+        
+      </div>
     </div>
   )
 }
-export default connect(
-  function(store){return store.quiz},
-  function(dispatch){
-    return {
-      loadQuiz:()=>{dispatch(getQuestions())}
-    }
-  })
-(Quiz)
+export default Quiz;

@@ -4,14 +4,34 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+import {
+    createBrowserRouter,
+    RouterProvider,
+  } from "react-router-dom";
+  import "./index.css";
+import QuizComponent from './QuizComponent';
+import QuizList from './QuizList';
+  
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <App></App>,
+      children:[
+        {
+            path:'/quiz/:c',
+            element:<QuizComponent></QuizComponent>
+        },
+        {
+            path:'/categories',
+            element:<QuizList></QuizList>
+        }
+      ]
+    },
 
-    <App />
+  ]);
+  
+  ReactDOM.createRoot(document.getElementById("root")).render(
 
-);
+      <RouterProvider router={router} />
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  );
