@@ -1,5 +1,4 @@
-import { useFormik } from "formik"
-
+import { Formik,Field,useFormik } from "formik"
 function checkValues(values){
   var errors={}
   
@@ -30,7 +29,7 @@ function checkValues(values){
   return errors
 }
 
-function Studentform() {
+function Employeeform() {
   var formik = useFormik(
     {
       initialValues:{
@@ -65,4 +64,4 @@ function Studentform() {
     </div>
   )
 }
-export default Studentform
+export default Employeeform

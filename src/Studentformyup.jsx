@@ -1,36 +1,7 @@
 import { useFormik } from "formik"
+import * as Yup from 'yup'
 
-function checkValues(values){
-  var errors={}
-  
-  if(!values.firstname){
-    errors.firstname="first name required"
-  }
-  else{
-    if(values.firstname.length>=10){
-      errors.firstname='first name cannot be more than 10 letters'
-    }
-    if(values.firstname.length<3){
-      errors.firstname='firstname cannot be soo small'
-    }
-  }
-
-  if(!values.lastname){
-    errors.lastname="last name required"
-  }
-  else{
-    if(values.lastname.length>=5){
-      errors.lastname='lastname name cannot be more than 5 letters'
-    }
-    if(values.lastname.length<3){
-      errors.lastname='lastname cannot be soo small'
-    }
-  }
-
-  return errors
-}
-
-function Studentform() {
+function Studentformyup() {
   var formik = useFormik(
     {
       initialValues:{
@@ -39,7 +10,11 @@ function Studentform() {
         dob:'',
         gender:''
       },
-      validate:checkValues,
+      validationSchema:Yup.object({
+        firstname:Yup.string().max(8,"first name cannot be more than 8 letters").min(4,'first name cannot be less than 4 letters').required('First name required'),
+        lastname:Yup.string().max(5,"last name cannot be more than 8 letters").min(4,'last name cannot be less than 3 letters').required('Last name required')
+      }),
+      // validate:checkValues,
       onSubmit:(values)=>{
         console.log(values)
       }
@@ -48,7 +23,7 @@ function Studentform() {
   console.log(formik.touched)
   return (
     <div className='border border-2 p-2 border-success'>
-      <h1>Studentform</h1>
+      <h1>Studentform with YUP</h1>
       <form onSubmit={formik.handleSubmit}>
         <input className={formik.touched.firstname && formik.errors.firstname && 'border border-4 border-danger'} 
         type="text" name="firstname" placeholder="First Name" onBlur={formik.handleBlur} onChange={formik.handleChange}/><br/>
@@ -65,4 +40,4 @@ function Studentform() {
     </div>
   )
 }
-export default Studentform
+export default Studentformyup
